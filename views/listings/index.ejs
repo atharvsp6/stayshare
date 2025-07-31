@@ -1,0 +1,196 @@
+<% layout("/layouts/boilerplate") -%>
+  <style>
+    #filters {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      margin-bottom: 2rem;
+      padding: 0 0 1rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      scrollbar-width: thin;
+      scrollbar-color: #ccc #f8f9fa;
+    }
+
+    #filters::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    #filters::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    #filters::-webkit-scrollbar-track {
+      background: #f8f9fa;
+    }
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 80px;
+      padding: 0.5rem 1rem;
+      border-radius: 1.5rem;
+      transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+      opacity: 0.85;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .filter:hover {
+      opacity: 1;
+      background: #f8f9fa;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .filter i {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+      color: #ff385c;
+    }
+
+    .filter-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0;
+      color: #222;
+    }
+
+    .tax-info {
+      display: none;
+    }
+
+    .tax-toggle {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 1rem;
+      border: 1px solid #000000;
+      border-radius: 1rem;
+      width: fit-content;
+      padding: 0.2rem 0.5rem;
+      margin-left: auto;
+    }
+  </style>
+
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- <h2 class="fw-semibold">All Listings</h2> -->
+        <!-- <a href="/listings/new" class="btn btn-dark rounded-pill px-4">+ New Listing</a> -->
+      </div>
+      
+      
+      <div id="filters">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p class="filter-text">Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p class="filter-text">Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p class="filter-text">Iconic cities</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tree"></i></div>
+          <p class="filter-text">Nature</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-landmark"></i></div>
+          <p class="filter-text">Castles</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-water"></i></div>
+          <p class="filter-text">Beach</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowflake"></i></div>
+          <p class="filter-text">Skiing</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p class="filter-text">Camping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p class="filter-text">Resorts</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-city"></i></div>
+          <p class="filter-text">Urban</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mug-hot"></i></div>
+          <p class="filter-text">B&B</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-dog"></i></div>
+          <p class="filter-text">Pet Friendly</p>
+        </div>
+      </div>
+      <div class="tax-toggle">
+          <div class="form-check form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after Taxes</label>
+          </div>
+ 
+          <br>
+        </div>
+       
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <% for (let listing of allListings) { %>
+          <div class="col">
+            <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+              <div class="card h-100 border-0 shadow-sm rounded-4 listing-card">
+                <div class="ratio ratio-4x3 rounded-top overflow-hidden">
+                  <img src="<%= listing.image.url %>" class="w-100 h-100 object-fit-cover" alt="listing-image">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title mb-1 fw-bold">
+                    <%= listing.title %>
+                  </h5>
+                  <p class="text-muted small mb-1">
+                    <%= listing.location %>, <%= listing.country %>
+                  </p>
+                  <p  data-price="<%= listing.price %>" class="text-success mb-0 price">&#x20B9;<%= listing.price.toLocaleString("en-IN") %> <span
+                        class="text-muted fs-6">/night</span>
+                      <i style="color:#222" class="tax-info"> &nbsp;&nbsp;+18% GST</i></p>
+                  
+                </div>
+              </div>
+            </a>
+          </div>
+          <% } %>
+      </div>
+    </div>
+    <script>
+let taxSwitch = document.getElementById("switchCheckDefault");
+
+taxSwitch.addEventListener("click", function () {
+  let taxInfoElements = document.querySelectorAll(".tax-info");
+  let priceElements = document.querySelectorAll(".price");
+
+  taxInfoElements.forEach(el => {
+    el.style.display = taxSwitch.checked ? "none" : "inline";
+  });
+
+  priceElements.forEach(priceEl => {
+    let basePrice = parseFloat(priceEl.dataset.price);
+    let finalPrice = taxSwitch.checked ? basePrice * 1.18 : basePrice;
+    // Only change the number, NOT the innerHTML (so tax-info stays)
+    priceEl.childNodes[0].textContent = `₹${finalPrice.toLocaleString("en-IN")} `;
+  });
+});
+</script>
+
+  </body>
