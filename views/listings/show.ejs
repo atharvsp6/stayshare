@@ -25,7 +25,7 @@
                 <%= listing.location %>, <%= listing.country %>
               </p>
               <p>Hosted By: <i>
-                  <%= listing.owner.username %>
+                  <%= listing.owner ? listing.owner.username : "Unknown" %>
                 </i></p>
               <p class="mb-3 text-secondary fs-6">
                 <%= listing.description %>
