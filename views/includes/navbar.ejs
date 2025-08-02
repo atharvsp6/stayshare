@@ -37,6 +37,32 @@
       margin-left: 0 !important;
     }
   }
+
+  /* Add margin below navbar to prevent overlap */
+  .navbar {
+    margin-bottom: 1.5rem;
+    z-index: 1020;
+  }
+
+  /* Make collapsed navbar links stack vertically on mobile */
+  @media (max-width: 768px) {
+    .navbar-collapse {
+      background: #fff;
+      padding: 1rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .navbar-nav {
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+    .navbar-nav .nav-link {
+      padding: 0.75rem 1rem;
+      font-size: 1.1rem;
+    }
+    .navbar-brand {
+      font-size: 1.3rem;
+    }
+  }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
