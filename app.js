@@ -31,7 +31,7 @@ const reviewRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
 
 
-const dbUrl = process.env.ATLASTDB_URL;
+const dbUrl = process.env.ATLASDB_URL;
 async function main() {
     await mongoose.connect(dbUrl)
 }
