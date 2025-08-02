@@ -12,30 +12,48 @@
     color: white;
   }
 
-  .btn-search i{
+  .btn-search i {
     display: inline;
     margin-right: 0.25rem;
   }
+
+  @media (max-width: 768px) {
+    .navbar-nav {
+      text-align: center;
+    }
+
+    .navbar .form-control {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .btn-search {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .navbar-nav.ms-auto {
+      margin-left: 0 !important;
+    }
+  }
 </style>
-
-
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i> StayShare</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
-
       </div>
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search" style="border-radius: 25px; padding: 0.5rem 3rem 0.5rem 3rem;"/>
+        <form class="d-flex flex-column flex-md-row w-100" role="search">
+          <input class="form-control me-md-2 mb-2 mb-md-0" type="search" placeholder="Search destinations" aria-label="Search" style="border-radius: 25px;"/>
           <button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass" style="display: inline;"></i>Search
+            <i class="fa-solid fa-magnifying-glass"></i>Search
           </button>
         </form>
       </div>
@@ -44,10 +62,10 @@
         <% if(!currUser){ %>
           <a class="nav-link" href="/signup"><b>Sign Up</b></a>
           <a class="nav-link" href="/login"><b>Login</b></a>
-          <%} %>
-            <% if(currUser){ %>
-              <a class="nav-link" href="/logout">Logout</a>
-              <%} %>
+        <% } %>
+        <% if(currUser){ %>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
       </div>
     </div>
   </div>
